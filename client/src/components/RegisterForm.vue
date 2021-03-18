@@ -59,12 +59,15 @@ export default {
             title: 'Signed in successfully'
           })
           this.$router.push('/form')
+          this.registerPayload.username = ''
+          this.registerPayload.password = ''
+          this.registerPayload.repassword = ''
         })
         .catch(err => {
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: err.response.data.msg + '!'
+            text: err.response.data.message + '!'
           })
         })
     }
@@ -82,7 +85,7 @@ export default {
     font-weight: bold;
 }
 .btn-primary {
-    background: darkgreen;
+    background: darkblue;
     font-weight: bold;
 }
 </style>

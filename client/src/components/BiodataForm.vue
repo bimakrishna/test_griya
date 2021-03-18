@@ -1,10 +1,10 @@
 <template>
   <div class="container-fluid h-100">
-      <div class="row h-100">
-        <div class="col-md-3 h-100 d-flex justify-content-center align-items-center">
+      <div class="row h-100 card-form">
+        <div class="col-md-4 d-flex justify-content-center align-items-center">
           <img alt="Vue logo" src="../assets/logo.png" width="200">
         </div>
-        <div class="col-md-9 h-100 d-flex justify-content-center align-items-center">
+        <div class="col-md-8 h-100 d-flex justify-content-center align-items-center">
           <div class="col-md-8 rounded px-5 py-4 shadow bg-white text-left">
             <form id="signup-form" @submit.prevent="addBiodata">
               <div class="row rounded">
@@ -68,6 +68,21 @@ export default {
         .then((result) => {
           if (result.isConfirmed) {
             this.$store.dispatch('getBiodata')
+            const Toast = Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 3000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+              }
+            })
+            Toast.fire({
+              icon: 'success',
+              title: 'Your Bio is finish'
+            })
             this.$router.push('/')
             this.formBiodataPayload.name = ''
             this.formBiodataPayload.alamat = ''
@@ -87,14 +102,6 @@ export default {
   created () {
     this.$store.dispatch('getBiodata')
   }
-  // mounted () {
-  //   this.$store.dispatch('getBiodata')
-  //   if (localStorage.getItem('token')) {
-  //     this.$store.commit('isRegister', true)
-  //   } else {
-  //     this.$router.push('/register')
-  //   }
-  // }
 }
 </script>
 
@@ -112,5 +119,9 @@ li {
 }
 a {
   color: #42b983;
+}
+
+.card-form {
+  margin-top: 100px;
 }
 </style>
