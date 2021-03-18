@@ -18,7 +18,10 @@ export default {
   methods: {
     addToRegister () {
       if (this.$store.state.registered) {
-        Swal.fire('Logout dulu dong')
+        Swal.fire({
+          title: 'Logout dulu dong',
+          icon: 'warning'
+        })
         this.$store.push('/')
       }
     },
@@ -59,8 +62,10 @@ export default {
 <style>
 .navbar {
     border-radius: 20px;
-    background-color: white;
-    justify-content: flex-end
+    background-image: url('https://images.unsplash.com/photo-1513002749550-c59d786b8e6c?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=934&q=80');
+    opacity: 70%;
+    justify-content: flex-end;
+    box-shadow: 0px 5px 15px rgba(0,0,0, .5);
 }
 .nav-link{
     font-weight: bold;

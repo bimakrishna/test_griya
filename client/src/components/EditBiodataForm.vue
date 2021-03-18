@@ -1,13 +1,13 @@
 <template>
   <div class="container-fluid h-100">
       <div class="row h-100 card-bio">
-        <div class="col-md-4 d-flex justify-content-center align-items-center">
+        <div class="col-md-4 d-flex justify-content-center align-items-center logo-edit">
           <img alt="Vue logo" src="../assets/logo.png" width="200">
         </div>
         <div class="col-md-8 h-100 d-flex justify-content-center align-items-center">
-          <div class="col-md-8 rounded px-5 py-4 shadow bg-white text-left">
+          <div class="col-md-8 edited-card px-5 py-4 shadow bg-white text-left">
             <form id="signup-form">
-              <div class="row rounded">
+              <div class="row ">
                 <div class="logo-bro">
                     <p class="text-logo">Edit Yours  !</p>
                 </div>
@@ -83,6 +83,21 @@ export default {
         .then((result) => {
           if (result.isConfirmed) {
             this.$store.dispatch('getBiodata')
+            const Toast = Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 3000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+              }
+            })
+            Toast.fire({
+              icon: 'success',
+              title: 'Edited successfully'
+            })
             this.$router.push('/')
           }
         })
@@ -108,5 +123,13 @@ export default {
 }
 .card-bio {
   margin-top: 100px;
+}
+.logo-edit {
+  background-color: #ffc107;
+  border-bottom-right-radius: 50px;
+  box-shadow: 0px 5px 15px rgba(0,0,0, .5);
+}
+.edited-card {
+  border-top-left-radius: 50px;
 }
 </style>
